@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name="Brand")
+@Table(name="Type")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Brand {
+public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -22,6 +22,6 @@ public class Brand {
     @Column(name = "Name")
     private String name;
 
-    @OneToMany(mappedBy = "Brand",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "Type",fetch = FetchType.LAZY)
     private List<Product> products;
 }
