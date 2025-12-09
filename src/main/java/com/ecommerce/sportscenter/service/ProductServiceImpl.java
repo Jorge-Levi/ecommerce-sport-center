@@ -4,13 +4,14 @@ import com.ecommerce.sportscenter.entity.Product;
 import com.ecommerce.sportscenter.model.ProductResponse;
 import com.ecommerce.sportscenter.repository.ProductRepository;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Log4j
+@Slf4j
 public class ProductServiceImpl implements ProductService{
 
     private final ProductRepository productRepository;

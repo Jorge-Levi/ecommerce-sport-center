@@ -4,6 +4,7 @@ import com.ecommerce.sportscenter.entity.Brand;
 import com.ecommerce.sportscenter.model.BrandResponse;
 import com.ecommerce.sportscenter.repository.BrandRepository;
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
-@Log4j
+@Slf4j
 public class BrandServiceImpl implements BrandService {
     private final BrandRepository brandRepository;
 
