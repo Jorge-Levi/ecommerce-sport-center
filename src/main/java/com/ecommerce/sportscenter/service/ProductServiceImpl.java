@@ -3,12 +3,10 @@ package com.ecommerce.sportscenter.service;
 import com.ecommerce.sportscenter.entity.Product;
 import com.ecommerce.sportscenter.model.ProductResponse;
 import com.ecommerce.sportscenter.repository.ProductRepository;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 @Slf4j
@@ -31,15 +29,10 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<ProductResponse> getProducts() {
+    public Page<ProductResponse> getProducts(Pageable pageable) {
         log.info("Fetching Products!!!");
-        List<Product> productList = productRepository.findAll();
-
-        List<ProductResponse> productResponses = productList.stream()
-                .map(this::convertToProductResponse)
-                .collect(Collectors.toList());
-        log.info("Fetched All Products!!!");
-        return productResponses;
+        Page<Product> productPage = productRepository.findAll(pageable);
+        return productPage.map(this::convertToProductResponse);
     }
 
     private ProductResponse convertToProductResponse(Product product) {
