@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Product } from "../../app/models/products";
+import ProductList from "./ProductList";
 
 const Catalog = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -10,17 +11,9 @@ const Catalog = () => {
       .then((data) => setProducts(data.content));
   }, []);
   return (
-    <ul>
-      {products.map((product) => (
-        <div key={product.id}>
-          <p>Name: {product.name}</p>
-          <p>Description: {product.description}</p>
-          <p>Price: {product.price}</p>
-          <p>Brand: {product.productBrand}</p>
-          <p>Type: {product.productType}</p>
-        </div>
-      ))}
-    </ul>
+    <>
+      <ProductList products={products}></ProductList>
+    </>
   );
 };
 
