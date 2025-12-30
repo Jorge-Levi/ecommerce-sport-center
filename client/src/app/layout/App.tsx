@@ -5,7 +5,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import { useState } from "react";
-import Catalog from "../../features/catalog/Catalog";
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
 function App() {
@@ -29,8 +29,8 @@ function App() {
         darkMode={darkMode}
         handleThemeChange={handleThemeChange}
       ></Header>
-      <Container>
-        <Catalog></Catalog>
+      <Container sx={{ paddingTop: "64px" }}>
+        <Outlet></Outlet>
       </Container>
     </ThemeProvider>
   );
