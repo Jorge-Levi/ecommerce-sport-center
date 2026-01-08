@@ -9,15 +9,17 @@ import {
   Typography,
 } from "@mui/material";
 
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import agent from "../../app/api/agent";
+import NotFound from "../../app/errors/NotFoundError";
+import Spinner from "../../app/layout/Spinner";
 import type { Product } from "../../app/models/products";
 
 export default function ProductDetails() {
   const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState<Product | null>();
-  const [loading, setLoading] = useState(true);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState<boolean>(() => !!id);
   const extractImageName = (item: Product): string | null => {
     if (item && item.pictureUrl) {
       const parts = item.pictureUrl.split("/");
@@ -35,14 +37,19 @@ export default function ProductDetails() {
     }).format(price);
   };
   useEffect(() => {
-    axios
-      .get(`http://localhost:8081/api/products/${id}`)
-      .then((response) => setProduct(response.data))
-      .catch((error) => console.error(error))
+    if (!id) return;
+
+    agent.Store.details(Number(id))
+      .then((data) => setProduct(data))
+      .catch((error) => {
+        console.error(error);
+        setProduct(null);
+      })
       .finally(() => setLoading(false));
   }, [id]);
-  if (loading) return <h3>Loading Product...</h3>;
-  if (!product) return <h3>Product not found</h3>;
+
+  if (loading) return <Spinner message="Loading Products..."></Spinner>;
+  if (!product) return <NotFound></NotFound>;
   return (
     <Grid container spacing={6}>
       <Grid item xs={6}>
