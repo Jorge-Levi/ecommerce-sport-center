@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import BasketPage from "../../features/basket/basketPage";
 import Catalog from "../../features/catalog/Catalog";
 import ProductDetails from "../../features/catalog/ProductDetails";
 import ContactPage from "../../features/contact/ContactPage";
@@ -16,6 +17,7 @@ const Routes = createBrowserRouter([
       { path: "store", element: <Catalog></Catalog> },
       { path: "store/:id", element: <ProductDetails></ProductDetails> },
       { path: "contact", element: <ContactPage></ContactPage> },
+      { path: "basket", element: <BasketPage></BasketPage> },
       { path: "not-found", element: <NotFound></NotFound> },
       { path: "server-error", element: <ServerError></ServerError> },
       { path: "*", element: <Navigate replace to="/not-found" /> },

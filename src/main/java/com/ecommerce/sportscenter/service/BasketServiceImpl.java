@@ -24,12 +24,15 @@ public class BasketServiceImpl implements BasketService{
     public List<BasketResponse> getAllBaskets() {
         log.info("Fetching All Baskets");
         List<Basket> basketList = (List<Basket>) basketRepository.findAll();
+
         List<BasketResponse> basketResponses = basketList.stream()
                 .map(this::convertToBasketResponse)
                 .collect(Collectors.toList());
-        log.info("Fetched All Baskets");
-        return List.of();
+
+        log.info("Fetched All Baskets: {}", basketResponses.size());
+        return basketResponses;
     }
+
 
     @Override
     public BasketResponse getBasketById(String basketId) {
